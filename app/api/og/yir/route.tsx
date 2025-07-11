@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
-export const runtime = "edge";
+// export const runtime = "edge"; // Disabled to avoid 1MB limit on free plan
 
 export async function GET(req: NextRequest) {
   const inter = await fetch(
