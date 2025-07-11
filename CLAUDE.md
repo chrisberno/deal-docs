@@ -129,6 +129,14 @@ Key environment variables (see `.env.example`):
 5. **Check TODO.md** for current project priorities
 6. **Reference `.env.example`** for required environment variables
 
+## 🚨 IMPORTANT: Commit Message Policy
+**DO NOT include Claude branding in commit messages**
+- No "🤖 Generated with [Claude Code]" footers
+- No "Co-Authored-By: Claude" attributions
+- Keep commit messages clean and professional
+- User will provide credit when/how they choose
+- Focus on clear, descriptive commit messages without AI attribution
+
 ## Resources
 - [Papermark Documentation](https://docs.papermark.io) - if available
 - [Next.js 14 Docs](https://nextjs.org/docs)
