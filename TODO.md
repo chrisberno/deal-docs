@@ -36,6 +36,9 @@
 - [ ] Optimize images
 - [ ] Test loading performance
 - [ ] Review database queries
+- [ ] **TECH DEBT**: Fix Vercel edge function size limit for YIR OG image generation
+  - Current workaround: disabled edge runtime in `app/api/og/yir/route.tsx`
+  - Need to optimize font loading or refactor image generation
 
 ## Security & Compliance
 - [ ] Review authentication flow

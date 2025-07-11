@@ -60,12 +60,30 @@ Key environment variables (see `.env.example`):
 - Dependencies installed via npm
 - Environment variables configured
 - Development server running on http://localhost:3000
+- Neon PostgreSQL database connected and migrated
+- Deployed to Vercel at https://deal-docs-957qidru8-connie-direct.vercel.app
 
 ### ⏳ Pending Setup
-- Vercel Postgres database connection
-- Prisma database migration
-- File upload storage configuration
-- Email service configuration
+- File upload storage configuration (Vercel Blob)
+- Email service configuration (Resend)
+- Analytics service configuration (Tinybird)
+
+### ⚠️ Known Technical Debt & Issues
+
+**1. Vercel Edge Function Size Limit Workaround**
+- **Issue**: `app/api/og/yir/route.tsx` exceeds 1MB edge function limit on Vercel free plan
+- **Current Fix**: Disabled edge runtime (`// export const runtime = "edge";`)
+- **Impact**: Year in Review OG image generation runs on Node.js runtime (slower but functional)
+- **Long-term Solution**: 
+  - Optimize font loading (use smaller fonts or external CDN)
+  - Consider upgrading to Vercel Pro plan
+  - Or refactor to generate images client-side/statically
+- **File**: `app/api/og/yir/route.tsx:4`
+
+**2. Potential Future Issues**
+- Other OG image endpoints may hit same limit as features grow
+- Edge runtime vs Node.js runtime inconsistencies could emerge
+- Font loading strategy needs optimization for production use
 
 ## Common Tasks
 
