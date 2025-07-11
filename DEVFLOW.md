@@ -95,10 +95,27 @@ git push origin main
 1. In Vercel dashboard → your project → Storage tab
 2. Browse Marketplace → select "Neon"
 3. Connect your existing Neon database
-4. Vercel will auto-configure the environment variables
+4. Vercel will auto-configure most environment variables
+
+### CRITICAL: Add Missing Environment Variables
+⚠️ **Neon integration doesn't set all required variables**
+
+Go to Vercel Dashboard → Project → Settings → Environment Variables and add:
+
+```env
+POSTGRES_PRISMA_URL_NON_POOLING = postgresql://user:pass@host.neon.tech/db?sslmode=require
+NEXTAUTH_SECRET = your-strong-secret-min-32-characters
+NEXTAUTH_URL = https://your-project-url.vercel.app
+```
+
+**Important Notes:**
+- Use the **non-pooling** connection string from Neon for `POSTGRES_PRISMA_URL_NON_POOLING`
+- Set each variable for: Production, Preview, Development
+- Generate a strong random string for `NEXTAUTH_SECRET` (min 32 chars)
+- Use your actual Vercel deployment URL for `NEXTAUTH_URL`
 
 ### Deploy
-Click "Deploy" - it should now succeed with database connected.
+Click "Deploy" - should now succeed with all environment variables configured.
 
 ## Step 6: Known Issues & Fixes Applied
 
@@ -162,6 +179,15 @@ These are configured in environment variables but not required for basic functio
 2. Test `npm run build` locally first
 3. Verify all required environment variables are set
 4. Ensure database connection strings are correct
+
+### "Environment variable not found: POSTGRES_PRISMA_URL_NON_POOLING"
+**Common Issue**: Neon integration only sets `POSTGRES_URL_NON_POOLING` but Prisma schema expects `POSTGRES_PRISMA_URL_NON_POOLING`
+
+**Solution**:
+1. Go to Vercel Dashboard → Settings → Environment Variables
+2. Add `POSTGRES_PRISMA_URL_NON_POOLING` with the same value as `POSTGRES_URL_NON_POOLING`
+3. Set for all environments (Production, Preview, Development)
+4. Redeploy
 
 ### Database Connection Issues
 1. Verify Neon database is running
