@@ -26,7 +26,7 @@ export default function Login() {
   const { next } = useParams as { next?: string };
 
   const [lastUsed, setLastUsed] = useLastUsed();
-  const authMethods = ["google", "email", "linkedin", "passkey"] as const;
+  const authMethods = ["google", "email", "linkedin", "okta", "passkey"] as const;
   type AuthMethod = (typeof authMethods)[number];
   const [clickedMethod, setClickedMethod] = useState<AuthMethod | undefined>(
     undefined,
@@ -181,6 +181,29 @@ export default function Login() {
                 <LinkedIn />
                 <span>Continue with LinkedIn</span>
                 {clickedMethod !== "linkedin" && lastUsed === "linkedin" && (
+                  <LastUsed />
+                )}
+              </Button>
+            </div>
+            <div className="relative">
+              <Button
+                onClick={() => {
+                  setClickedMethod("okta");
+                  setLastUsed("okta");
+                  signIn("okta", {
+                    ...(next && next.length > 0 ? { callbackUrl: next } : {}),
+                  }).then((res) => {
+                    if (res?.status) {
+                      setClickedMethod(undefined);
+                    }
+                  });
+                }}
+                loading={clickedMethod === "okta"}
+                disabled={clickedMethod && clickedMethod !== "okta"}
+                className="flex w-full items-center justify-center space-x-2 border border-gray-300 bg-blue-600 font-normal text-white hover:bg-blue-700"
+              >
+                <span>Continue with OKTA</span>
+                {clickedMethod !== "okta" && lastUsed === "okta" && (
                   <LastUsed />
                 )}
               </Button>

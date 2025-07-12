@@ -59,6 +59,33 @@ export const authOptions: NextAuthOptions = {
       },
       allowDangerousEmailAccountLinking: true,
     }),
+    // OKTA OIDC Provider
+    {
+      id: "okta",
+      name: "OKTA",
+      type: "oauth",
+      clientId: process.env.OKTA_CLIENT_ID as string,
+      clientSecret: process.env.OKTA_CLIENT_SECRET as string,
+      issuer: "https://trial-2094636.okta.com",
+      authorization: {
+        url: "https://trial-2094636.okta.com/oauth2/v1/authorize",
+        params: { 
+          scope: "openid profile email" 
+        }
+      },
+      token: "https://trial-2094636.okta.com/oauth2/v1/token",
+      userinfo: "https://trial-2094636.okta.com/oauth2/v1/userinfo",
+      jwks_endpoint: "https://trial-2094636.okta.com/oauth2/v1/keys",
+      profile(profile: any) {
+        return {
+          id: profile.sub,
+          name: profile.name || profile.preferred_username,
+          email: profile.email,
+          image: profile.picture || null,
+        };
+      },
+      allowDangerousEmailAccountLinking: true,
+    },
     EmailProvider({
       async sendVerificationRequest({ identifier, url }) {
         const hasValidNextAuthUrl = !!process.env.NEXTAUTH_URL;
@@ -107,6 +134,18 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   adapter: PrismaAdapter(prisma),
+  debug: true,
+  logger: {
+    error(code, metadata) {
+      console.error("NextAuth Error:", code, metadata);
+    },
+    warn(code) {
+      console.warn("NextAuth Warning:", code);
+    },
+    debug(code, metadata) {
+      console.log("NextAuth Debug:", code, metadata);
+    }
+  },
   session: { strategy: "jwt" },
   cookies: {
     sessionToken: {
