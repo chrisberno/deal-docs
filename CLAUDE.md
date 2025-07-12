@@ -61,6 +61,15 @@ Key environment variables (see `.env.example`):
 
 ### Quick Notes & Learnings
 - **OKTA authentication working with trial-2094636.okta.com domain** ✅
+- **HANKO API key error handling**: Quick fix is to add dummy values `HANKO_API_KEY=dummy-not-used` and `NEXT_PUBLIC_HANKO_TENANT_ID=dummy-not-used` to environment variables. Longer term solution is to remove Hanko dependencies from codebase since we're using OKTA authentication.
+- **HANKO API Key Error Handling**:
+  - **Quick Fix**: Check `.env` file for correct HANKO API key
+  - **Longer-term Solution**: 
+    - Implement robust error handling in authentication middleware
+    - Add retry mechanism with exponential backoff
+    - Log and monitor API key related errors
+    - Set up automated alerts for persistent authentication failures
+    - Consider fallback authentication methods or graceful degradation
 
 ### Commands
 - `npm run dev` - Start development server
