@@ -62,6 +62,30 @@ export async function getLimits({
   teamId: string;
   userId: string;
 }) {
+  // Self-hosted bypass: give unlimited access to all features
+  if (process.env.SELF_HOSTED === 'true') {
+    return {
+      users: 999,
+      links: null, // unlimited
+      documents: null, // unlimited
+      domains: 999,
+      datarooms: 999, // unlimited datarooms!
+      customDomainOnPro: true,
+      customDomainInDataroom: true,
+      advancedLinkControlsOnPro: true,
+      watermarkOnBusiness: true,
+      conversationsInDataroom: true,
+      fileSizeLimits: {
+        video: 1000,
+        document: 1000,
+        image: 100,
+        excel: 100,
+        maxFiles: 1000,
+        maxPages: 1000,
+      },
+      usage: { documents: 0, links: 0, users: 0 },
+    };
+  }
   const team = await prisma.team.findUnique({
     where: {
       id: teamId,
