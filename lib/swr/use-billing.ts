@@ -73,6 +73,11 @@ export function usePlan() {
   const teamInfo = useTeam();
   const teamId = teamInfo?.currentTeam?.id;
 
+  const { data: plan, error } = useSWR<PlanResponse>(
+    teamId && `/api/teams/${teamId}/billing/plan`,
+    fetcher,
+  );
+
   // Self-hosted bypass: return unlimited plan
   if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') {
     return {
@@ -93,11 +98,6 @@ export function usePlan() {
       error: null,
     };
   }
-
-  const { data: plan, error } = useSWR<PlanResponse>(
-    teamId && `/api/teams/${teamId}/billing/plan`,
-    fetcher,
-  );
 
   // Parse the plan using the parsing function
   const parsedPlan = plan
