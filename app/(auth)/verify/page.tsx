@@ -80,8 +80,8 @@ export default function VerifyPage({
         <div className="z-10 mx-5 mt-[calc(1vh)] h-fit w-full max-w-md overflow-hidden rounded-lg sm:mx-0 sm:mt-[calc(2vh)] md:mt-[calc(3vh)]">
           <div className="items-left flex flex-col space-y-3 px-4 py-6 pt-8 sm:px-12">
             <img
-              src="/_static/papermark-logo.svg"
-              alt="Papermark Logo"
+              src="/_static/deal-docs-logo.svg"
+              alt="Deal Docs Logo"
               className="-mt-8 mb-36 h-7 w-auto self-start sm:mb-32 md:mb-48"
             />
             <Link href="/">

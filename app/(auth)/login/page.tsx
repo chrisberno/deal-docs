@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Papermark",
     images: [
       {
-        url: "/_static/meta-image.png",
+        url: "https://github.com/chrisberno/deal-docs/raw/main/public/_static/meta-image.png",
         width: 800,
         height: 600,
       },
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: data.title,
     description: data.description,
-    creator: "@papermarkio",
-    images: ["/_static/meta-image.png"],
+    creator: "@chrisberno",
+    images: ["https://github.com/chrisberno/deal-docs/raw/main/public/_static/meta-image.png"],
   },
 };
 

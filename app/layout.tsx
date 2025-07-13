@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     title: data.title,
     description: data.description,
     url: data.url,
-    siteName: "Papermark",
+    siteName: "Deal Docs",
     images: [
       {
-        url: "/_static/meta-image.png",
+        url: "https://github.com/chrisberno/deal-docs/raw/main/public/_static/meta-image.png",
         width: 800,
         height: 600,
       },

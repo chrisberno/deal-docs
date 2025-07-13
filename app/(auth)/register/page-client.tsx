@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 
 import { useState } from "react";
 
-import PapermarkLogo from "@/public/_static/papermark-logo.svg";
+import DealDocsLogo from "@/public/_static/deal-docs-logo.svg";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
@@ -37,14 +37,14 @@ export default function Register() {
         <div className="flex flex-col items-center justify-center space-y-3 px-4 py-6 pt-8 text-center sm:px-16">
           <Link href="/">
             <Image
-              src={PapermarkLogo}
+              src={DealDocsLogo}
               width={119}
               height={32}
-              alt="Papermark Logo"
+              alt="Deal Docs Logo"
             />
           </Link>
           <h3 className="text-2xl font-medium text-foreground">
-            Start sharing documents
+            A.I. Enabled Startup Docs & Datarooms
           </h3>
         </div>
         <form
