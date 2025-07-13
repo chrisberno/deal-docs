@@ -42,6 +42,8 @@ export default function DataroomsPage() {
     (isBusiness && numDatarooms < limitDatarooms);
 
   useEffect(() => {
+    // Skip redirect if self-hosted
+    if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') return;
     if (!isTrial && (isFree || isPro)) router.push("/documents");
   }, [isTrial, isFree, isPro]);
 
