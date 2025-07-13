@@ -19,23 +19,6 @@
 
 Deal Docs is a self-hosted enterprise dataroom platform based on Papermark, featuring OKTA OIDC authentication and unlimited access to all premium features through our subscription bypass implementation.
 
-## 🎯 Enterprise Value Unlocked
-
-**💰 Replaces $50,000+/year solutions like:**
-- Ansarada ($1000+/month)
-- Firmex ($500+/month) 
-- Intralinks ($1500+/month)
-- DealRoom ($400+/month)
-
-**🔓 All Premium Features Included:**
-- ✅ **Unlimited Datarooms** (normally $400+/month)
-- ✅ **OKTA OIDC Integration** (enterprise SSO)
-- ✅ **Custom Branding & Domains** (normally pro tier)
-- ✅ **Advanced Analytics & Audit Trails** (normally business tier)
-- ✅ **Granular Permissions & User Groups** (enterprise tier)
-- ✅ **NDA Integration & Watermarking** (premium tier)
-- ✅ **Real-time Collaboration & Chat** (business tier)
-
 ## 🚀 Key Features
 
 ### 🔐 Enterprise Authentication
