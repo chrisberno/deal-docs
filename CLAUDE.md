@@ -1,6 +1,8 @@
 # Claude AI Assistant Guide for Deal Docs
 
-This file contains essential information for Claude AI assistants working on this Deal Docs project.
+⚠️ **IMPORTANT**: New AI agents should read `COLLABORATION_CONTEXT.md` FIRST for strategic context, then return here for technical implementation details.
+
+This file contains technical implementation history for Claude AI assistants working on this Deal Docs project.
 
 ## 🎯 What We've Built
 
