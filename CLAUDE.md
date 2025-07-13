@@ -62,13 +62,77 @@ Key environment variables (see `.env.example`):
 ### Quick Notes & Learnings
 - **OKTA authentication working with trial-2094636.okta.com domain** ✅
 - **HANKO API key error handling**: Quick fix is to add dummy values `HANKO_API_KEY=dummy-not-used` and `NEXT_PUBLIC_HANKO_TENANT_ID=dummy-not-used` to environment variables. Longer term solution is to remove Hanko dependencies from codebase since we're using OKTA authentication.
-- **HANKO API Key Error Handling**:
-  - **Quick Fix**: Check `.env` file for correct HANKO API key
-  - **Longer-term Solution**: 
-    - Implement robust error handling in authentication middleware
-    - Add retry mechanism with exponential backoff
-    - Log and monitor API key related errors
-    - Set up automated alerts for persistent authentication failures
+
+### Self-Hosted Subscription Bypass (Unlimited Features)
+
+**Status**: ✅ Successfully implemented for unlimited dataroom access
+
+For self-hosted deployments, all subscription restrictions have been bypassed to unlock enterprise features without payment.
+
+#### Environment Variables Required:
+```env
+SELF_HOSTED=true
+NEXT_PUBLIC_SELF_HOSTED=true
+```
+
+#### Files Modified for Paywall Bypass:
+
+**1. Backend Limits Override** (`ee/limits/server.ts:65-88`)
+```typescript
+// Self-hosted bypass: give unlimited access to all features
+if (process.env.SELF_HOSTED === 'true') {
+  return {
+    users: 999,
+    links: null, // unlimited
+    documents: null, // unlimited
+    domains: 999,
+    datarooms: 999, // unlimited datarooms!
+    customDomainOnPro: true,
+    customDomainInDataroom: true,
+    advancedLinkControlsOnPro: true,
+    // ... all enterprise features enabled
+  };
+}
+```
+
+**2. Frontend Plan Override** (`lib/swr/use-billing.ts:82-100`)
+```typescript
+// Self-hosted bypass: return unlimited plan
+if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') {
+  return {
+    plan: "datarooms-plus" as BasePlan,
+    planName: "Data Rooms Plus",
+    isDatarooms: true,
+    isDataroomsPlus: true,
+    // ... all premium features enabled
+  };
+}
+```
+
+**3. Frontend Redirect Bypass** (`pages/datarooms/index.tsx:45-47`)
+```typescript
+useEffect(() => {
+  // Skip redirect if self-hosted
+  if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') return;
+  if (!isTrial && (isFree || isPro)) router.push("/documents");
+}, [isTrial, isFree, isPro]);
+```
+
+#### What This Unlocks:
+- ✅ **Unlimited Datarooms** (normally €99/month "Data Rooms Plus" plan)
+- ✅ **Unlimited Documents** per dataroom
+- ✅ **Custom Branding** and domains
+- ✅ **Advanced Analytics** and audit trails
+- ✅ **NDA Agreements** and dynamic watermarking
+- ✅ **Granular Permissions** and user groups
+- ✅ **Real-time Conversations** in datarooms
+- ✅ **Bulk Download** capabilities
+- ✅ **All Enterprise Features** without subscription
+
+#### Deployment Notes:
+- Set both environment variables in Vercel for Production, Preview, and Development
+- This approach preserves original billing logic while enabling full feature access for self-hosted instances
+- Users get the equivalent of a €99/month enterprise plan for free
     - Consider fallback authentication methods or graceful degradation
 
 ### Commands

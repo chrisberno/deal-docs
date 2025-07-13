@@ -1,13 +1,10 @@
 <div align="center">
-  <h1 align="center">Papermark</h1>
-  <h3>The open-source DocSend alternative.</h3>
-
-<a target="_blank" href="https://www.producthunt.com/posts/papermark-3?utm_source=badge-top-post-badge&amp;utm_medium=badge&amp;utm_souce=badge-papermark"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=411605&amp;theme=light&amp;period=daily" alt="Papermark - The open-source DocSend alternative | Product Hunt" style="width:250px;height:40px"></a>
-
+  <h1 align="center">Deal Docs</h1>
+  <h3>Enterprise dataroom platform with OKTA SSO - Self-hosted with unlimited features.</h3>
 </div>
 
 <div align="center">
-  <a href="https://www.papermark.com">papermark.com</a>
+  <strong>🏢 Enterprise Dataroom • 🔐 OKTA OIDC • 🚀 Self-Hosted • 💰 $50k+ Value</strong>
 </div>
 
 <br/>
@@ -20,14 +17,49 @@
 
 <br/>
 
-Papermark is the open-source document-sharing alternative to DocSend, featuring built-in analytics and custom domains.
+Deal Docs is a self-hosted enterprise dataroom platform based on Papermark, featuring OKTA OIDC authentication and unlimited access to all premium features through our subscription bypass implementation.
 
-## Features
+## 🎯 Enterprise Value Unlocked
 
-- **Shareable Links:** Share your documents securely by sending a custom link.
-- **Custom Branding:** Add a custom domain and your own branding.
-- **Analytics:** Gain insights through document tracking and soon page-by-page analytics.
-- **Self-hosted, Open-source:** Host it yourself and customize it as needed.
+**💰 Replaces $50,000+/year solutions like:**
+- Ansarada ($1000+/month)
+- Firmex ($500+/month) 
+- Intralinks ($1500+/month)
+- DealRoom ($400+/month)
+
+**🔓 All Premium Features Included:**
+- ✅ **Unlimited Datarooms** (normally $400+/month)
+- ✅ **OKTA OIDC Integration** (enterprise SSO)
+- ✅ **Custom Branding & Domains** (normally pro tier)
+- ✅ **Advanced Analytics & Audit Trails** (normally business tier)
+- ✅ **Granular Permissions & User Groups** (enterprise tier)
+- ✅ **NDA Integration & Watermarking** (premium tier)
+- ✅ **Real-time Collaboration & Chat** (business tier)
+
+## 🚀 Key Features
+
+### 🔐 Enterprise Authentication
+- **OKTA OIDC Integration** - Single sign-on for your organization
+- **Multi-provider Auth** - Google, LinkedIn, email, and passkey support
+- **User Management** - Team-based access control
+
+### 📁 Advanced Dataroom Management  
+- **Hierarchical Folder Structure** - Unlimited nesting and organization
+- **Granular Permissions** - Document and folder-level access control
+- **Bulk Operations** - Upload, download, and manage multiple files
+- **Version Control** - Track document revisions and changes
+
+### 📊 Enterprise Analytics
+- **Real-time View Tracking** - See who accessed what and when
+- **Detailed Audit Trails** - Complete access history and logs
+- **Custom Analytics** - Page-by-page engagement metrics
+- **Export Capabilities** - Download reports and usage data
+
+### 🎨 Professional Branding
+- **Custom Domains** - Use your own branded URLs
+- **White-label Interface** - Remove all third-party branding  
+- **Custom Logos & Colors** - Match your corporate identity
+- **Dynamic Watermarking** - Protect sensitive documents
 
 ## Demo
 
@@ -47,86 +79,192 @@ Papermark is the open-source document-sharing alternative to DocSend, featuring 
 - [Stripe](https://stripe.com) – Payments
 - [Vercel](https://vercel.com/) – Hosting
 
-## Getting Started
+## ⚡ Quick Start Guide
 
 ### Prerequisites
 
-Here's what you need to run Papermark:
+**Required:**
+- Node.js (version >= 18.18.0)
+- PostgreSQL Database ([Neon](https://neon.tech) recommended)
+- OKTA account for SSO authentication
 
-- Node.js (version >= 18.17.0)
-- PostgreSQL Database
-- Blob storage (currently [AWS S3](https://aws.amazon.com/s3/) or [Vercel Blob](https://vercel.com/storage/blob))
-- [Resend](https://resend.com) (for sending emails)
+**Optional but Recommended:**
+- [Vercel Blob](https://vercel.com/storage/blob) or [AWS S3](https://aws.amazon.com/s3/) for file storage
+- [Resend](https://resend.com) for email notifications
+- [Vercel](https://vercel.com) for hosting
 
-### 1. Clone the repository
-
-```shell
-git clone https://github.com/mfts/papermark.git
-cd papermark
-```
-
-### 2. Install npm dependencies
+### 1. Clone and Setup
 
 ```shell
+git clone https://github.com/your-username/deal-docs.git
+cd deal-docs
 npm install
 ```
 
-### 3. Copy the environment variables to `.env` and change the values
+### 2. Environment Configuration
 
 ```shell
 cp .env.example .env
 ```
 
-### 4. Initialize the database
+**Essential Environment Variables:**
+```env
+# Database (Neon PostgreSQL)
+POSTGRES_PRISMA_URL=postgresql://user:pass@host.neon.tech/db
+POSTGRES_PRISMA_URL_NON_POOLING=postgresql://user:pass@host.neon.tech/db
+
+# Authentication
+NEXTAUTH_SECRET=your-strong-secret-min-32-chars
+NEXTAUTH_URL=http://localhost:3000
+
+# OKTA OIDC (Enterprise SSO)
+OKTA_CLIENT_ID=your_okta_client_id
+OKTA_CLIENT_SECRET=your_okta_client_secret  
+OKTA_ISSUER=https://your-domain.okta.com/oauth2/default
+
+# Enterprise Feature Unlock
+SELF_HOSTED=true
+NEXT_PUBLIC_SELF_HOSTED=true
+```
+
+### 3. Database Setup
 
 ```shell
+# Initialize database with all 72+ tables
 npm run dev:prisma
 ```
 
-### 5. Run the dev server
+### 4. Start Development
 
 ```shell
 npm run dev
 ```
 
-### 6. Open the app in your browser
+Visit [http://localhost:3000](http://localhost:3000) - you'll have access to:
+- ✅ **Unlimited datarooms** (no trial restrictions)
+- ✅ **All enterprise features** unlocked
+- ✅ **OKTA SSO login** ready to use
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+### 5. OKTA OIDC Setup
 
-## Tinybird Instructions
+1. **Create OKTA Application:**
+   - Go to OKTA Admin Console
+   - Applications → Create App Integration  
+   - Choose "OIDC - OpenID Connect"
+   - Application type: "Web Application"
 
-To prepare the Tinybird database, follow these steps:
-
-0. We use `pipenv` to manage our Python dependencies. If you don't have it installed, you can install it using the following command:
-   ```sh
-   pkgx pipenv
+2. **Configure Redirect URIs:**
    ```
-1. Download the Tinybird CLI from [here](https://www.tinybird.co/docs/cli.html) and install it on your system.
-2. After authenticating with the Tinybird CLI, navigate to the `lib/tinybird` directory:
-   ```sh
-   cd lib/tinybird
+   http://localhost:3000/api/auth/callback/okta    # Development
+   https://your-domain.vercel.app/api/auth/callback/okta  # Production
    ```
-3. Push the necessary data sources using the following command:
-   ```sh
-   tb push datasources/*
-   tb push endpoints/get_*
+
+3. **Copy Credentials to .env:**
+   - Client ID → `OKTA_CLIENT_ID`
+   - Client Secret → `OKTA_CLIENT_SECRET`
+   - Issuer URI → `OKTA_ISSUER`
+
+## 🚀 Deployment to Vercel
+
+### Production Deployment
+
+1. **Push to GitHub:**
+   ```shell
+   git add .
+   git commit -m "Initial setup for deployment"
+   git push origin main
    ```
-4. Don't forget to set the `TINYBIRD_TOKEN` with the appropriate rights in your `.env` file.
 
-#### Updating Tinybird
+2. **Deploy to Vercel:**
+   - Go to [vercel.com/new](https://vercel.com/new)
+   - Import your GitHub repository
+   - Framework: Next.js (auto-detected)
+   - **Add all environment variables before deploying**
 
-```sh
-pipenv shell
-## start: pkgx-specific
-cd ..
-cd papermark
-## end: pkgx-specific
-pipenv update tinybird-cli
+3. **Essential Production Environment Variables:**
+   ```env
+   NEXTAUTH_URL=https://your-project.vercel.app
+   OKTA_CLIENT_ID=your_okta_client_id
+   OKTA_CLIENT_SECRET=your_okta_client_secret
+   SELF_HOSTED=true
+   NEXT_PUBLIC_SELF_HOSTED=true
+   POSTGRES_PRISMA_URL=your_neon_connection_string
+   POSTGRES_PRISMA_URL_NON_POOLING=your_neon_direct_connection
+   ```
+
+### 🎯 Verification Checklist
+
+After deployment, verify these enterprise features work:
+
+- ✅ **OKTA SSO Login** - Sign in with your organization account
+- ✅ **Unlimited Datarooms** - Navigate to `/datarooms` (no upgrade prompts)
+- ✅ **Document Upload** - Test file sharing functionality  
+- ✅ **Analytics Dashboard** - View document tracking data
+- ✅ **Custom Branding** - No subscription restrictions
+
+## 📊 Optional Integrations
+
+### Analytics (Tinybird)
+For advanced analytics, configure Tinybird:
+
+```shell
+# Install Tinybird CLI
+pip install tinybird-cli
+
+# Navigate to analytics config
+cd lib/tinybird
+
+# Deploy data sources
+tb push datasources/*
+tb push endpoints/get_*
 ```
+
+Add to `.env`:
+```env
+TINYBIRD_TOKEN=your_tinybird_token
+```
+
+## 📚 Additional Documentation
+
+- **[DEVFLOW.md](./DEVFLOW.md)** - Complete deployment guide from clone to production
+- **[CLAUDE.md](./CLAUDE.md)** - Technical implementation details and project history
+
+## 🔧 Development Scripts
+
+```shell
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run dev:prisma       # Generate Prisma client + run migrations
+npm run lint             # Run ESLint
+npm run format           # Format code with Prettier
+npm run email            # Start email development server (port 3001)
+```
+
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+**Build fails with Hanko errors:**
+```env
+# Add dummy values to .env
+HANKO_API_KEY=dummy-not-used
+NEXT_PUBLIC_HANKO_TENANT_ID=dummy-not-used
+```
+
+**Database connection issues:**
+```shell
+# Test connection
+npm run dev:prisma
+```
+
+**OKTA authentication not working:**
+- Verify redirect URIs in OKTA console
+- Check `OKTA_ISSUER` format: `https://domain.okta.com/oauth2/default`
+- Ensure client credentials are correct
 
 ## Contributing
 
-Papermark is an open-source project, and we welcome contributions from the community.
+Deal Docs is based on the open-source Papermark project. We welcome contributions to improve the platform.
 
 If you'd like to contribute, please fork the repository and make any changes you'd like. Pull requests are warmly welcome.
 

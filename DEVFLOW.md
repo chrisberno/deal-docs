@@ -2,6 +2,36 @@
 
 This document outlines the complete process to get Deal Docs (based on Papermark) from initial clone to successful Vercel deployment. Follow these steps for a clean setup.
 
+## 🎯 What You'll Build
+
+**💰 Enterprise Value: $50,000+/year**
+- **OKTA SSO Integration** - Enterprise authentication
+- **Unlimited Datarooms** - No subscription limits  
+- **Full Feature Access** - Everything unlocked
+- **Self-Hosted Control** - Your data, your rules
+
+**🏢 Enterprise Features:**
+- **Hierarchical folder structure** with unlimited nesting
+- **Granular permissions** (user groups, document-level access)  
+- **Custom branding** (logos, colors, domains)
+- **Analytics & audit trails** (who viewed what, when)
+- **NDA integration** & dynamic watermarking
+- **Real-time collaboration** with built-in chat
+- **Bulk downloads** & document management
+
+**🔐 Security & Access:**
+- **OKTA OIDC** single sign-on for your team
+- **Screenshot protection** & email verification
+- **Domain allow/deny lists** & webhook integrations
+
+**This Replaces Solutions Like:**
+- **Ansarada** ($1000+/month)
+- **Firmex** ($500+/month)  
+- **Intralinks** ($1500+/month)
+- **DealRoom** ($400+/month)
+
+**For FREE with your self-hosted deployment!**
+
 ## Prerequisites
 
 - Node.js >= 18.17.0
@@ -106,6 +136,18 @@ Go to Vercel Dashboard → Project → Settings → Environment Variables and ad
 POSTGRES_PRISMA_URL_NON_POOLING = postgresql://user:pass@host.neon.tech/db?sslmode=require
 NEXTAUTH_SECRET = your-strong-secret-min-32-characters
 NEXTAUTH_URL = https://your-project-url.vercel.app
+
+# OKTA OIDC Authentication (Enterprise SSO)
+OKTA_CLIENT_ID = your_okta_client_id
+OKTA_CLIENT_SECRET = your_okta_client_secret
+
+# Self-Hosted Feature Unlock (Unlimited Datarooms)
+SELF_HOSTED = true
+NEXT_PUBLIC_SELF_HOSTED = true
+
+# Optional: Dummy values to prevent Hanko build errors
+HANKO_API_KEY = dummy-not-used
+NEXT_PUBLIC_HANKO_TENANT_ID = dummy-not-used
 ```
 
 **Important Notes:**
@@ -141,16 +183,69 @@ git push origin main
 - Consider external font CDNs
 - Or move to Node.js runtime instead of edge
 
-## Step 7: Verification
+## Step 7: Enterprise Feature Unlock (Subscription Bypass)
+
+### Self-Hosted Deployment Benefits
+When you set `SELF_HOSTED=true` and `NEXT_PUBLIC_SELF_HOSTED=true`, you unlock ALL enterprise features without subscription limits:
+
+**Technical Implementation:**
+- **Backend Bypass**: Modified `ee/limits/server.ts` to return unlimited limits for self-hosted deployments
+- **Frontend Bypass**: Updated `lib/swr/use-billing.ts` to return "datarooms-plus" plan automatically
+- **Route Bypass**: Modified `pages/datarooms/index.tsx` to skip paywall redirects
+
+**Features Unlocked:**
+- **Unlimited Datarooms** (normally $400+/month)
+- **Unlimited Users** (normally restricted)
+- **Unlimited Documents & Links** (normally capped)
+- **Custom Domains** (normally pro feature)
+- **Advanced Analytics** (normally business feature)
+- **Watermarking** (normally business feature)
+- **Bulk Downloads** (normally premium)
+
+**Code Changes Made:**
+```typescript
+// In ee/limits/server.ts
+if (process.env.SELF_HOSTED === 'true') {
+  return {
+    users: 999,
+    links: null, // unlimited
+    documents: null, // unlimited
+    datarooms: 999, // unlimited datarooms!
+    // ... all enterprise features enabled
+  };
+}
+
+// In lib/swr/use-billing.ts  
+if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') {
+  return {
+    plan: "datarooms-plus" as BasePlan,
+    isDataroomsPlus: true,
+    // ... unlimited plan returned
+  };
+}
+
+// In pages/datarooms/index.tsx
+useEffect(() => {
+  // Skip redirect if self-hosted
+  if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') return;
+  if (!isTrial && (isFree || isPro)) router.push("/documents");
+}, [isTrial, isFree, isPro]);
+```
+
+## Step 8: Verification
 
 ### Confirm Successful Deployment
 1. Check Vercel deployment status shows "Ready"
 2. Visit your production URL
 3. Test basic functionality:
-   - User registration/login
+   - User registration/login with OKTA
    - Document upload (may need file storage setup)
    - Link generation
    - Document viewing
+4. **Test Enterprise Features:**
+   - Navigate to `/datarooms` - should NOT redirect to upgrade
+   - Create new datarooms without limits
+   - Access all premium features without subscription prompts
 
 ## Optional: Additional Services
 
