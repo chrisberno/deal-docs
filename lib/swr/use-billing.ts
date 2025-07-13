@@ -73,6 +73,27 @@ export function usePlan() {
   const teamInfo = useTeam();
   const teamId = teamInfo?.currentTeam?.id;
 
+  // Self-hosted bypass: return unlimited plan
+  if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') {
+    return {
+      plan: "datarooms-plus",
+      planName: "Data Rooms Plus",
+      trial: null,
+      isTrial: false,
+      isOldAccount: false,
+      isCustomer: true,
+      isAnnualPlan: false,
+      isFree: false,
+      isStarter: false,
+      isPro: false,
+      isBusiness: false,
+      isDatarooms: true,
+      isDataroomsPlus: true,
+      loading: false,
+      error: null,
+    };
+  }
+
   const { data: plan, error } = useSWR<PlanResponse>(
     teamId && `/api/teams/${teamId}/billing/plan`,
     fetcher,
