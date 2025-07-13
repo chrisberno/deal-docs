@@ -81,7 +81,7 @@ export function usePlan() {
   // Self-hosted bypass: return unlimited plan
   if (process.env.NEXT_PUBLIC_SELF_HOSTED === 'true') {
     return {
-      plan: "datarooms-plus",
+      plan: "datarooms-plus" as BasePlan,
       planName: "Data Rooms Plus",
       trial: null,
       isTrial: false,
