@@ -58,7 +58,7 @@ export default function Login() {
             <img
               src="/_static/deal-docs-logo.svg"
               alt="Deal Docs Logo"
-              className="md:mb-48s -mt-8 mb-36 h-7 w-auto self-start sm:mb-32"
+              className="md:mb-48s -mt-8 mb-36 h-12 w-auto self-start sm:mb-32"
             />
             <Link href="/">
               <span className="text-balance text-3xl font-semibold text-gray-900">
