@@ -101,6 +101,7 @@
     "next-auth": "^4.24.11",
     "next-plausible": "^3.12.4",
     "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.12",
     "notion-client": "^7.3.0",
     "notion-utils": "^7.3.0",
     "nuqs": "^2.4.3",
